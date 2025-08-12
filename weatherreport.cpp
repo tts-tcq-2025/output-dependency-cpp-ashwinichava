@@ -71,11 +71,20 @@ namespace WeatherSpace
         string report = Report(sensor);
         assert(report.length() > 0);
     }
+    void Test_SunnyWhenStormy() {
+    SensorStub sensor;
+    std::string report = WeatherSpace::Report(sensor);
+    std::cout << "Report: " << report << std::endl;
+
+    // This will fail because report == "Sunny Day", which is incorrect
+    assert(report.find("rain") != std::string::npos || report.find("Stormy") != std::string::npos);
+}
 }
 
 void testWeatherReport() {
     cout << "\nWeather report test\n";
     WeatherSpace::TestRainy();
     WeatherSpace::TestHighPrecipitation();
+    WeatherSpace::Test_SunnyWhenStormy();
     cout << "All is well (maybe)\n";
 }
